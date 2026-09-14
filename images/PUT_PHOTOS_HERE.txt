@@ -1,0 +1,13 @@
+Drop these files in this folder (same names as listed):
+
+- her-photo.jpg   -> shown in the final letter screen
+- photo1.jpg      -> memory gallery, screen 4
+- photo2.jpg
+- photo3.jpg
+- photo4.jpg
+
+You can add more photos too — just add more entries to the
+`photos` array in script.js's birthdayConfig at the top of the file.
+
+If a file is missing, the site still works fine and shows a
+graceful placeholder instead of a broken image icon.

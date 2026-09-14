@@ -1,0 +1,8 @@
+Drop your song here as:
+
+- our-song.mp3
+
+The "♫ Our Song" button in the top-right corner will play it once
+tapped (browsers block autoplay, so this has to be a tap). If no
+file is present, tapping the button just quietly does nothing
+harmful — the rest of the site works perfectly either way.

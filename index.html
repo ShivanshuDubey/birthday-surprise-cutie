@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>Happy Birthday ✨</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Ambient background layer: hearts / sparkles are injected here by script.js -->
+<div id="ambient-layer" aria-hidden="true"></div>
+
+<!-- Progress indicator, shown once the journey has started -->
+<div id="progress-indicator" class="progress-indicator hidden">💕 <span id="progress-current">1</span> / <span id="progress-total">6</span></div>
+
+<!-- Music toggle -->
+<button id="music-toggle" class="music-toggle hidden" aria-label="Play our song">♫ Our Song</button>
+<audio id="bg-music" loop preload="none">
+  <!-- REPLACE: put your song at audio/our-song.mp3 -->
+  <source src="audio/our-song.mp3" type="audio/mpeg">
+</audio>
+
+<main id="app">
+
+  <!-- ============================================================ -->
+  <!-- SCREEN 1 — The Surprise Door (time-locked until her birthday) -->
+  <!-- ============================================================ -->
+  <section id="screen-1" class="screen active" data-screen="1">
+    <div class="door-frame">
+      <p class="eyebrow-note">a little something for</p>
+      <h1 class="hero-title" id="hero-name">Hey, Birthday Girl! 💕</h1>
+      <p class="hero-sub">I made a tiny little world for you...<br>but there's only one way to enter.</p>
+      <button class="glow-button" id="open-surprise-btn">Open Your Surprise <span class="spark">✨</span></button>
+      <div class="lock-box hidden" id="lock-box">
+        <p class="lock-message hidden" id="lock-message"></p>
+        <!-- REPLACE: images/gifs/locked-N.gif with your own gifs -->
+        <img id="lock-gif" class="lock-gif hidden" src="" alt="" onerror="this.classList.add('hidden')">
+      </div>
+      <p class="countdown-line hidden" id="countdown-line"></p>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SCREEN 2 — Blow up the balloon, then meet the teddy -->
+  <!-- ============================================================ -->
+  <section id="screen-2" class="screen" data-screen="2">
+    <div class="panel">
+      <h2 class="screen-title" id="balloon-title">Blow Up The Balloon 🎈</h2>
+      <p class="hint-line" id="balloon-hint">Tap the balloon again and again... let's see how big it gets.</p>
+
+      <div id="balloon-scene" class="balloon-scene">
+        <button id="balloon" class="balloon" aria-label="Blow the balloon">🎈</button>
+      </div>
+
+      <div id="balloon-burst-message" class="hidden">
+        <p class="big-message" id="big-message-text">HAPPY<br>BIRTHDAY!! 🎉</p>
+      </div>
+
+      <div id="gift-reveal-scene" class="gift-reveal-scene hidden">
+        <div class="reveal-stack" id="reveal-stack">
+          <div class="reveal-balloon">🎈</div>
+          <div class="hang-ribbon"></div>
+          <div class="reveal-teddy">🧸</div>
+          <div class="hang-ribbon"></div>
+          <div class="reveal-gif-wrap">
+            <!-- REPLACE: images/gifs/reveal.gif with your own gif -->
+            <img id="reveal-gif" class="reveal-gif" src="images/gifs/reveal.gif" alt="" onerror="this.classList.add('hidden'); document.getElementById('reveal-gif-fallback').classList.remove('hidden');">
+            <span id="reveal-gif-fallback" class="reveal-gif-fallback hidden">🎁</span>
+          </div>
+        </div>
+        <p class="hint-line">✨ For you ✨</p>
+        <button class="glow-button small" id="to-screen-3-btn">Continue →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SCREEN 3 — The Question -->
+  <!-- ============================================================ -->
+  <section id="screen-3" class="screen" data-screen="3">
+    <div class="panel proposal-panel">
+      <h2 class="proposal-title" id="proposal-question">Are You Excited To Marry Me?</h2>
+
+      <div id="proposal-question-view">
+        <div id="proposal-stage" class="proposal-stage">
+          <button id="prop-yes" class="prop-btn prop-yes dodging">Yes 💍</button>
+          <button id="prop-no" class="prop-btn prop-no">No</button>
+        </div>
+        <div id="proposal-feedback-box" class="feedback-box hidden">
+          <p class="quiz-feedback" id="proposal-feedback"></p>
+          <!-- REPLACE: images/gifs/no-N.gif with your own gifs -->
+          <img id="proposal-feedback-gif" class="feedback-gif hidden" src="" alt="" onerror="this.classList.add('hidden')">
+        </div>
+      </div>
+
+      <div id="proposal-success" class="hidden">
+        <p class="result-line" id="proposal-success-text">She said YES! 💍❤️</p>
+        <!-- REPLACE: images/gifs/yes-N.gif with your own gifs -->
+        <img id="proposal-success-gif" class="feedback-gif hidden" src="" alt="" onerror="this.classList.add('hidden')">
+        <button class="glow-button small" id="to-screen-4-btn">One More Challenge →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SCREEN 4 — Mini Game: Catch the Hearts -->
+  <!-- ============================================================ -->
+  <section id="screen-4" class="screen" data-screen="4">
+    <div class="panel game-panel">
+      <h2 class="screen-title">Catch the Hearts ❤️</h2>
+      <div class="game-hud">
+        <span>Score: <strong id="game-score">0</strong></span>
+        <span>Time: <strong id="game-timer">20</strong>s</span>
+      </div>
+      <div id="game-field" class="game-field">
+        <button class="glow-button" id="start-game-btn">Start Game</button>
+      </div>
+      <button class="ghost-button" id="skip-game-btn">Skip this game →</button>
+      <div id="game-result" class="hidden">
+        <p class="result-line" id="game-result-text"></p>
+        <div class="game-result-actions">
+          <button class="glow-button small" id="to-screen-5-btn">One Last Surprise →</button>
+          <button class="ghost-button" id="replay-game-btn">Play Again ↻</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SCREEN 5 — Memory Lane (polaroid stack) -->
+  <!-- ============================================================ -->
+  <section id="screen-5" class="screen" data-screen="5">
+    <div class="panel">
+      <h2 class="screen-title">Our Little Memory Lane 📸</h2>
+      <p class="hint-line">Tap a photo, or swipe it away, to see the next one.</p>
+      <!-- Stack is generated from birthdayConfig.photos in script.js -->
+      <div id="polaroid-stack" class="polaroid-stack"></div>
+      <div class="polaroid-dots" id="polaroid-dots"></div>
+      <button class="glow-button small" id="to-screen-6-btn">Keep Going →</button>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SCREEN 6 — Blow out the candles, then read your letter -->
+  <!-- ============================================================ -->
+  <section id="screen-6" class="screen" data-screen="6">
+    <div class="panel letter-panel">
+
+      <div id="cake-scene" class="cake-scene">
+        <h2 class="screen-title">Make A Wish 🎂</h2>
+        <p class="hint-line" id="cake-hint">Blow out each candle...</p>
+        <div id="candle-row" class="candle-row"></div>
+        <div class="cake" id="the-cake">
+          <span class="cake-cherry">🍒</span>
+          <div class="cake-top"><div class="cake-drip"></div></div>
+          <div class="cake-middle"></div>
+          <div class="cake-bottom"></div>
+          <div class="cake-plate"></div>
+        </div>
+      </div>
+
+      <div id="letter-scene" class="letter-scene hidden">
+        <div class="photo-frame">
+          <!-- REPLACE: images/her-photo.jpg with her real photo -->
+          <img src="images/her-photo.jpg" alt="" id="her-photo" onerror="this.parentElement.classList.add('photo-missing')">
+          <div class="photo-fallback">💗</div>
+        </div>
+        <h2 class="screen-title letter-title">Happy Birthday, <span id="letter-name">Love</span></h2>
+        <!-- REPLACE: the paragraphs below with your own letter -->
+        <div id="letter-body" class="letter-body"></div>
+        <p class="ps-line" id="ps-line"></p>
+        <!-- REPLACE: images/gifs/final.gif with your own closing gif -->
+        <img id="final-gif" class="final-gif hidden" src="images/gifs/final.gif" alt="" onerror="this.style.display='none'">
+        <button class="glow-button small" id="replay-btn">Replay Our Little Story ↻</button>
+      </div>
+
+      <div id="confetti-root" aria-hidden="true"></div>
+    </div>
+  </section>
+
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>

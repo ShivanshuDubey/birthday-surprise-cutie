@@ -1,0 +1,18 @@
+Drop your own GIFs here, matching the filenames referenced in
+birthdayConfig inside script.js:
+
+  locked-1.gif ... locked-8.gif   -> screen 1, shown (with the matching
+                                      text) if she taps before unlock time
+  reveal.gif                       -> hangs at the bottom of the balloon
+                                      -> teddy -> gift stack on screen 2
+  no-1.gif ... no-6.gif            -> screen 3, shown under the message
+                                      each time she taps "No"
+  yes-1.gif ... yes-3.gif          -> screen 3, shown (one at random)
+                                      after she finally taps "Yes"
+  final.gif                        -> shown at the very end, under the
+                                      final letter
+
+Add or remove entries (and matching gif filenames) freely in
+birthdayConfig in script.js — the site still works fine if a gif
+file is missing, it just quietly hides the broken image. Any entry
+can also be text-only or gif-only; leave the other field as "".
