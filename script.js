@@ -13,7 +13,7 @@ const birthdayConfig = {
   // The surprise stays locked behind a "not yet" screen until this
   // exact moment. Use the format "YYYY-MM-DDTHH:MM:SS" (24-hour time,
   // in whatever timezone she'll be opening the link from).
-  unlockDateTime: "2026-09-20T00:00:00",
+  unlockDateTime: "2026-09-19T23:45:00",
 
   // Shown one by one, in order (cycling back to the start if she taps
   // more times than there are entries) if she tries to open the
@@ -88,15 +88,14 @@ const birthdayConfig = {
   // The final letter. Each array item becomes its own paragraph.
   // Replace freely with your own words, inside jokes, and memories.
   letter: [
-    "Happy Birthday to the girl who somehow makes my ordinary days feel a little more special. ❤️",
-    "I don't know how I got lucky enough to have you in my life, but I know one thing — I never want to take it for granted.",
-    "Your smile, your little habits, the way you laugh, the random conversations, the silly moments, and even the moments when you annoy me a little 😂... somehow, all of it has become a part of my favorite life.",
-    "Today is your day, but honestly, I feel like I'm the lucky one for getting to celebrate you.",
-    "I hope this year brings you everything your heart quietly wishes for. I hope you laugh more, dream bigger, travel farther, and always remember just how loved you are.",
-    "Happy Birthday, my love.",
-    "Here's to you. Here's to us. And here's to all the memories we haven't made yet. ♾️❤️"
+    "Happy Birthday to the girl who somehow makes even my most ordinary days feel a little more special. ❤️",
+    "Honestly, I still don't know how I got so lucky to have you in my life, but I'm really grateful that I did. And I never want to take that for granted.",
+    "Your smile, your little habits, the way you laugh, our random conversations, the stupid things we laugh about, and even those moments when you annoy me a little 😂 — somehow, all of it has become such an important part of my life.",
+    "I hope this year brings you everything you've been wishing for, even the things you don't always say out loud. I hope you laugh a lot, chase your dreams, travel to all the places you want to see, and always remember how special and loved you are.",
+    "Happy Birthday, my love. ❤️",
+    "Here's to you, here's to us, and to all the crazy, beautiful memories we still have left to make together. ♾️❤️"
   ],
-  psLine: "P.S. I love you more than this website can possibly explain. ❤️",
+  psLine: "I love you more than this website can possibly explain. ❤️",
 
   // Shown at the very end, under the final letter.
   // REPLACE: images/gifs/final.gif with your own closing gif.
@@ -327,9 +326,9 @@ const birthdayConfig = {
     const t = new Date(birthdayConfig.unlockDateTime).getTime();
     return isNaN(t) ? 0 : t; // if misconfigured, treat as already unlocked
   }
-  function isUnlocked() { 
-    return true;
-    // return Date.now() >= getUnlockTime(); 
+  function isUnlocked() {
+    // return true;
+    return Date.now() >= getUnlockTime(); 
   }
 
   function formatCountdown(ms) {
